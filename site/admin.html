@@ -66,10 +66,10 @@ dialog::backdrop{background:rgba(13,21,32,.45)}
 <header><div class="wrap"><div class="brand"><h1>soaone Academy</h1><small>Painel</small></div><div id="hdr"></div></div></header>
 <main class="wrap" id="app"></main>
 <dialog id="dlg"></dialog>
-<script>window.SOAONE_API="https://soaone.com.br/api";</script>
+<script>window.SOAONE_API="https://soaone.com.br/api/v2";</script>
 <script>
 (function(){
-const API=(window.SOAONE_API||"https://soaone.com.br/api").replace(/\/$/,"");
+const API=(window.SOAONE_API||"https://soaone.com.br/api/v2").replace(/\/$/,"");
 const TKEY="soaone-token";const TOTAL=34;
 let TOKEN=null;try{TOKEN=localStorage.getItem(TKEY);}catch(e){}
 const $=s=>document.querySelector(s);
