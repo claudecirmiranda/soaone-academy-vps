@@ -1,0 +1,16 @@
+academy.soaone.com.br {
+	encode zstd gzip
+	root * /srv/site
+	file_server
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+	}
+	@media path /media/*
+	header @media Cache-Control "public, max-age=604800"
+}
+
+listas.soaone.com.br {
+	reverse_proxy listmonk:9000
+}

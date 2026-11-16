@@ -1,0 +1,39 @@
+# Fase 1 — site estático + listmonk (captura de leads do e-book)
+services:
+  caddy:
+    image: caddy:2.8
+    restart: unless-stopped
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./site:/srv/site:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+  listmonk-db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: listmonk
+      POSTGRES_PASSWORD: ${LISTMONK_DB_PASSWORD:?defina no .env}
+      POSTGRES_DB: listmonk
+    volumes: [listmonk_db:/var/lib/postgresql/data]
+
+  listmonk:
+    image: listmonk/listmonk:v4.1.0
+    restart: unless-stopped
+    depends_on: [listmonk-db]
+    command: [sh, -c, "./listmonk --install --idempotent --yes && ./listmonk"]
+    environment:
+      LISTMONK_app__address: 0.0.0.0:9000
+      LISTMONK_db__host: listmonk-db
+      LISTMONK_db__user: listmonk
+      LISTMONK_db__password: ${LISTMONK_DB_PASSWORD}
+      LISTMONK_db__database: listmonk
+      LISTMONK_ADMIN_USER: ${LISTMONK_ADMIN_USER:-admin}
+      LISTMONK_ADMIN_PASSWORD: ${LISTMONK_ADMIN_PASSWORD:?defina no .env}
+
+volumes:
+  caddy_data: {}
+  caddy_config: {}
+  listmonk_db: {}

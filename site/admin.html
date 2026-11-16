@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel · soaone Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,600..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--paper:#F2F5F8;--sheet:#fff;--ink:#132030;--ink-2:#4B5A6B;--ink-3:#7B8898;--line:#C8D1DB;--lock:#C27C00;--lock-soft:rgba(194,124,0,.12);--threat:#C4513A;--ok:#2C7A57;--ok-soft:rgba(44,122,87,.12);--btn:#132030;--btn-ink:#F2F5F8;
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;--f-body:"IBM Plex Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--paper:#0D1520;--sheet:#111B28;--ink:#E4EBF3;--ink-2:#9FB0C2;--ink-3:#6E8094;--line:#26374A;--lock:#F0A63A;--lock-soft:rgba(240,166,58,.14);--threat:#E77A62;--ok:#55BC8E;--ok-soft:rgba(85,188,142,.14);--btn:#E4EBF3;--btn-ink:#0D1520;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 var(--f-body)}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;margin:0;line-height:1.1}
+h1{font-size:1.5rem}h2{font-size:1.15rem;margin-bottom:.8rem}
+button,input{font:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+header{border-bottom:1px solid var(--line);background:var(--sheet)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:60px}
+.brand{display:flex;align-items:baseline;gap:.6rem}.brand small{font-family:var(--f-mono);font-size:.72rem;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase}
+.btn{border:1px solid var(--btn);background:var(--btn);color:var(--btn-ink);padding:.55rem .95rem;border-radius:8px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;gap:.4rem;align-items:center}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+main.wrap{padding:24px 16px 60px}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:18px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kpi .n{font-family:var(--f-display);font-size:2.1rem;font-weight:800;font-stretch:80%;line-height:1}
+.kpi .l{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-top:.35rem}
+.grid2{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;margin-bottom:16px}
+.bars{display:flex;align-items:flex-end;gap:3px;height:140px;border-bottom:1px solid var(--line)}
+.bars i{flex:1;background:var(--lock);border-radius:3px 3px 0 0;min-height:2px;position:relative}
+.bars i:hover::after{content:attr(data-t);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:var(--paper);font-size:.75rem;padding:2px 6px;border-radius:4px;margin-bottom:4px}
+.axis{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.7rem;color:var(--ink-3);margin-top:4px}
+.hb{display:grid;grid-template-columns:150px 1fr 40px;gap:8px;align-items:center;font-size:.85rem;margin:.35rem 0}
+.hb .t{height:10px;background:var(--lock-soft);border-radius:5px;overflow:hidden}.hb .t i{display:block;height:100%;background:var(--lock)}
+.hb .v{text-align:right;font-family:var(--f-mono);font-size:.8rem}
+.funnel{display:grid;grid-template-columns:90px 1fr 70px;gap:8px;align-items:center;font-size:.82rem;margin:.25rem 0}
+.funnel .t{height:12px;background:var(--paper);border-radius:4px;position:relative;overflow:hidden}
+.funnel .a{position:absolute;inset:0 auto 0 0;background:var(--lock-soft)}.funnel .c{position:absolute;inset:0 auto 0 0;background:var(--ok)}
+.legend{display:flex;gap:14px;font-size:.78rem;color:var(--ink-2);margin-bottom:.5rem}.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+.tools{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.tools input{flex:1;min-width:200px;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:.55rem .7rem}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{text-align:left;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:500;padding:.5rem;border-bottom:1px solid var(--line)}
+td{padding:.55rem .5rem;border-bottom:1px solid var(--line);vertical-align:middle}
+tr.row{cursor:pointer}tr.row:hover td{background:var(--paper)}
+.pct{display:flex;align-items:center;gap:8px}.pct .t{width:70px;height:6px;background:var(--paper);border-radius:3px;overflow:hidden}.pct i{display:block;height:100%;background:var(--ok)}
+.muted{color:var(--ink-3)}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:.85rem;color:var(--ink-2)}
+.login{max-width:380px;margin:12vh auto;display:grid;gap:.8rem}
+.login label{font-size:.85rem;font-weight:500}.login input{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:.6rem .7rem}
+.err{color:var(--threat);font-size:.85rem;min-height:1.2em}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--sheet);color:var(--ink);width:min(720px,94vw);max-height:86vh;padding:0}
+dialog::backdrop{background:rgba(13,21,32,.45)}
+.dlg-h{display:flex;justify-content:space-between;align-items:flex-start;padding:16px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--sheet)}
+.dlg-b{padding:16px 18px;display:grid;gap:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{font-family:var(--f-mono);font-size:.72rem;padding:3px 7px;border-radius:5px;background:var(--paper);border:1px solid var(--line)}.chip.ok{background:var(--ok-soft);border-color:transparent;color:var(--ok)}
+.ev{font-size:.82rem;display:grid;grid-template-columns:130px 1fr;gap:4px 10px}.ev span:nth-child(odd){font-family:var(--f-mono);color:var(--ink-3);font-size:.75rem}
+@media (max-width:800px){.kpis{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.hide-sm{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand"><h1>soaone Academy</h1><small>Painel</small></div><div id="hdr"></div></div></header>
+<main class="wrap" id="app"></main>
+<dialog id="dlg"></dialog>
+<script>window.SOAONE_API="https://soaone.com.br/api";</script>
+<script>
+(function(){
+const API=(window.SOAONE_API||"https://soaone.com.br/api").replace(/\/$/,"");
+const TKEY="soaone-token";const TOTAL=34;
+let TOKEN=null;try{TOKEN=localStorage.getItem(TKEY);}catch(e){}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=d=>{if(!d)return"—";const x=new Date(d.replace(" ","T"));return isNaN(x)?d:x.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit"})+" "+x.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});};
+const day=d=>{const x=new Date(d+"T12:00");return x.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"});};
+function setToken(t){TOKEN=t;try{t?localStorage.setItem(TKEY,t):localStorage.removeItem(TKEY);}catch(e){}}
+async function api(path,opt={}){
+  const h={"Content-Type":"application/json"};if(TOKEN)h.Authorization="Bearer "+TOKEN;
+  let r;try{r=await fetch(API+path,{method:opt.method||"GET",headers:h,body:opt.body?JSON.stringify(opt.body):undefined});}catch(e){throw new Error("Sem conexão com a API ("+API+").");}
+  if(opt.raw&&r.ok)return r;
+  let d={};try{d=await r.json();}catch(e){}
+  if(r.status===401&&!path.startsWith("/auth/")){setToken(null);showLogin("Sua sessão expirou. Entre de novo.");throw new Error("sessão");}
+  if(!r.ok)throw new Error(d.erro||"Erro "+r.status);
+  return d;
+}
+function showLogin(msg){
+  $("#hdr").innerHTML="";
+  $("#app").innerHTML=`<form class="login card" id="lf"><h2>Entrar no painel</h2><p class="muted" style="font-size:.88rem">Use a conta de administrador cadastrada no portal.</p>
+  <div><label for="le">E-mail</label><input id="le" type="email" autocomplete="email"></div>
+  <div><label for="lp">Senha</label><input id="lp" type="password" autocomplete="current-password"></div>
+  <p class="err" id="lerr">${esc(msg||"")}</p><button class="btn" type="submit">Entrar</button></form>`;
+  $("#lf").addEventListener("submit",async e=>{e.preventDefault();$("#lerr").textContent="";
+    try{const d=await api("/auth/login",{method:"POST",body:{email:$("#le").value.trim(),senha:$("#lp").value}});
+      if(!d.usuario.admin){setToken(null);$("#lerr").textContent="Esta conta não é de administrador.";return;}
+      setToken(d.token);boot(d.usuario);}catch(x){$("#lerr").textContent=x.message;}});
+}
+let BUSCA="",PAG=1;
+async function boot(user){
+  try{if(!user){const d=await api("/me");user=d.usuario;}}catch(x){if(x.message!=="sessão")showLogin(x.message);return;}
+  if(!user.admin){showLogin("Esta conta não é de administrador.");return;}
+  $("#hdr").innerHTML=`<span class="muted" style="margin-right:.8rem;font-size:.88rem">${esc(user.nome)}</span><button class="btn ghost" id="out" type="button">Sair</button>`;
+  $("#out").addEventListener("click",async()=>{try{await api("/auth/logout",{method:"POST"});}catch(e){}setToken(null);showLogin();});
+  $("#app").innerHTML=`<section class="kpis" id="kpis"></section>
+  <section class="grid2"><div class="card"><h2>Cadastros nos últimos 30 dias</h2><div id="days"></div></div><div class="card"><h2>Função dos alunos</h2><div id="roles"></div></div></section>
+  <section class="card" style="margin-bottom:16px"><h2>Progresso por aula</h2><div class="legend"><span style="--c:var(--lock-soft)">Começaram</span><span style="--c:var(--ok)">Concluíram</span></div><div id="aulas"></div></section>
+  <section class="card"><div class="tools"><h2 style="margin:0 auto 0 0">Alunos</h2><input id="q" type="search" placeholder="Buscar por nome ou e-mail"><button class="btn ghost" id="csv" type="button">Exportar CSV</button></div><div id="tbl"></div></section>`;
+  let t;$("#q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{BUSCA=e.target.value.trim();PAG=1;loadStudents();},300);});
+  $("#csv").addEventListener("click",exportCsv);
+  loadStats();loadStudents();
+}
+async function loadStats(){
+  let s;try{s=await api("/admin/stats");}catch(x){$("#kpis").innerHTML=`<p class="err">${esc(x.message)}</p>`;return;}
+  $("#kpis").innerHTML=[[s.alunos,"Alunos"],[s.novos_7d,"Novos em 7 dias"],[s.ativos_7d,"Ativos em 7 dias"],[s.concluiram_curso,"Concluíram o curso"]].map(([n,l])=>`<div class="card kpi"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+  const map={};s.cadastros_por_dia.forEach(r=>map[r.dia]=r.n);const ds=[];
+  for(let i=29;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");ds.push([k,map[k]||0]);}
+  const mx=Math.max(1,...ds.map(d=>d[1]));
+  $("#days").innerHTML=`<div class="bars">${ds.map(([k,n])=>`<i style="height:${n/mx*100}%" data-t="${day(k)}: ${n}"></i>`).join("")}</div><div class="axis"><span>${day(ds[0][0])}</span><span>hoje</span></div>`;
+  const fm=Math.max(1,...s.funcoes.map(f=>f.n));
+  $("#roles").innerHTML=s.funcoes.length?s.funcoes.map(f=>`<div class="hb"><span>${esc(f.funcao)}</span><div class="t"><i style="width:${f.n/fm*100}%"></i></div><span class="v">${f.n}</span></div>`).join(""):`<p class="muted">Ainda sem alunos.</p>`;
+  const am=Math.max(1,...s.por_aula.map(a=>a.iniciaram));
+  $("#aulas").innerHTML=s.por_aula.length?s.por_aula.map(a=>`<div class="funnel"><span class="mono" style="font-family:var(--f-mono)">${esc(a.aula_id.replace("aula-",""))}</span><div class="t"><i class="a" style="width:${a.iniciaram/am*100}%"></i><i class="c" style="width:${a.concluiram/am*100}%"></i></div><span class="muted">${a.concluiram}/${a.iniciaram}</span></div>`).join(""):`<p class="muted">Nenhuma aula iniciada ainda.</p>`;
+}
+async function loadStudents(){
+  let d;try{d=await api(`/admin/students?q=${encodeURIComponent(BUSCA)}&pagina=${PAG}`);}catch(x){$("#tbl").innerHTML=`<p class="err">${esc(x.message)}</p>`;return;}
+  if(!d.alunos.length){$("#tbl").innerHTML=`<p class="muted">${BUSCA?"Nenhum aluno encontrado.":"Ainda sem alunos cadastrados."}</p>`;return;}
+  const pages=Math.max(1,Math.ceil(d.total/d.por_pagina));
+  $("#tbl").innerHTML=`<table><thead><tr><th>Nome</th><th class="hide-sm">E-mail</th><th class="hide-sm">Função</th><th>Progresso</th><th class="hide-sm">Cadastro</th><th>Último acesso</th></tr></thead><tbody>
+  ${d.alunos.map(a=>`<tr class="row" data-id="${a.id}" tabindex="0"><td>${esc(a.nome)}</td><td class="hide-sm">${esc(a.email)}</td><td class="hide-sm">${esc(a.funcao||"—")}</td><td><div class="pct"><div class="t"><i style="width:${a.percentual}%"></i></div>${a.concluidas}/${TOTAL}</div></td><td class="hide-sm muted">${fmt(a.cadastro)}</td><td class="muted">${fmt(a.ultimo_acesso)}</td></tr>`).join("")}</tbody></table>
+  <div class="pager"><span>${d.total} aluno${d.total===1?"":"s"}</span><span><button class="btn ghost" id="pv" ${PAG<=1?"disabled":""}>Anterior</button> ${PAG} de ${pages} <button class="btn ghost" id="nx" ${PAG>=pages?"disabled":""}>Próxima</button></span></div>`;
+  $("#pv").addEventListener("click",()=>{PAG--;loadStudents();});$("#nx").addEventListener("click",()=>{PAG++;loadStudents();});
+  document.querySelectorAll("tr.row").forEach(r=>{const go=()=>openStudent(r.dataset.id);r.addEventListener("click",go);r.addEventListener("keydown",e=>{if(e.key==="Enter")go();});});
+}
+const EVT={cadastro:"Criou a conta",login:"Entrou",aula_aberta:"Abriu a aula",video_play:"Deu play no vídeo",video_fim:"Terminou o vídeo",ebook_download:"Baixou o e-book",aula_voltar:"Voltou na aula",senha_esquecida:"Pediu nova senha",senha_redefinida:"Redefiniu a senha",aula_concluida:"Concluiu a aula",quiz:"Fez o quiz"};
+async function openStudent(id){
+  const dl=$("#dlg");let d;try{d=await api("/admin/students/"+id);}catch(x){return;}
+  const u=d.usuario,p=d.progresso;
+  dl.innerHTML=`<div class="dlg-h"><div><h2 style="margin:0">${esc(u.nome)}</h2><p class="muted" style="font-size:.85rem">${esc(u.email)} · ${esc(u.funcao||"função não informada")}<br>Desde ${fmt(u.desde)} · último acesso ${fmt(u.ultimo_acesso)}</p></div><button class="btn ghost" id="cl" type="button">Fechar</button></div>
+  <div class="dlg-b"><div><h3 style="margin-bottom:.5rem">Aulas · ${p.concluidas.length}/${TOTAL} (${p.percentual}%)</h3><div class="chips">${p.aulas.length?p.aulas.sort((a,b)=>a.aula_id.localeCompare(b.aula_id,undefined,{numeric:true})).map(a=>`<span class="chip ${a.concluida?"ok":""}" title="${a.concluida?"Concluída em "+fmt(a.concluido_em):"No passo "+(a.passo+1)}">${esc(a.aula_id.replace("aula-",""))}${a.concluida?" ✓":" · p"+(a.passo+1)}</span>`).join(""):`<span class="muted">Nenhuma aula iniciada.</span>`}</div></div>
+  <div><h3 style="margin-bottom:.5rem">Quizzes</h3>${p.quiz.length?`<div class="chips">${p.quiz.map(q=>`<span class="chip">Módulo ${q.modulo}: ${q.melhor}/${q.total} · ${q.tentativas}x</span>`).join("")}</div>`:`<span class="muted">Nenhum quiz feito.</span>`}</div>
+  <div><h3 style="margin-bottom:.5rem">Atividade recente</h3><div class="ev">${d.eventos.map(e=>`<span>${fmt(e.created_at)}</span><span>${esc(EVT[e.tipo]||e.tipo)}${e.aula_id?" · "+esc(e.aula_id.replace("aula-","")):""}</span>`).join("")||`<span></span><span class="muted">Sem eventos.</span>`}</div></div></div>`;
+  $("#cl").addEventListener("click",()=>dl.close());dl.showModal();
+}
+async function exportCsv(){
+  try{const r=await api("/admin/export.csv",{raw:true});const b=await r.blob();const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="alunos-soaone-academy.csv";document.body.appendChild(a);a.click();a.remove();}catch(x){}
+}
+TOKEN?boot():showLogin();
+})();
+</script>
+</body>
+</html>
