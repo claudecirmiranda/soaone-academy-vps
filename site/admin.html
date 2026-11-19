@@ -49,6 +49,8 @@ td{padding:.55rem .5rem;border-bottom:1px solid var(--line);vertical-align:middl
 tr.row{cursor:pointer}tr.row:hover td{background:var(--paper)}
 .pct{display:flex;align-items:center;gap:8px}.pct .t{width:70px;height:6px;background:var(--paper);border-radius:3px;overflow:hidden}.pct i{display:block;height:100%;background:var(--ok)}
 .muted{color:var(--ink-3)}
+.libs{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.5rem}
+.lib{display:flex;gap:.5rem;align-items:center;border:1px solid var(--line);border-radius:8px;padding:.5rem .7rem;font-size:.9rem;cursor:pointer}
 .pager{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:.85rem;color:var(--ink-2)}
 .login{max-width:380px;margin:12vh auto;display:grid;gap:.8rem}
 .login label{font-size:.85rem;font-weight:500}.login input{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:.6rem .7rem}
@@ -106,10 +108,19 @@ async function boot(user){
   $("#app").innerHTML=`<section class="kpis" id="kpis"></section>
   <section class="grid2"><div class="card"><h2>Cadastros nos últimos 30 dias</h2><div id="days"></div></div><div class="card"><h2>Função dos alunos</h2><div id="roles"></div></div></section>
   <section class="card" style="margin-bottom:16px"><h2>Progresso por aula</h2><div class="legend"><span style="--c:var(--lock-soft)">Começaram</span><span style="--c:var(--ok)">Concluíram</span></div><div id="aulas"></div></section>
+  <section class="card" style="margin-bottom:16px"><div class="tools"><h2 style="margin:0 auto 0 0">Módulos liberados</h2><button class="btn" id="libSave" type="button">Salvar liberação</button></div><div class="libs" id="libs"></div><p class="muted" id="libMsg" style="font-size:.85rem;margin:.6rem 0 0">Os alunos só abrem as aulas dos módulos marcados. Você, como administrador, vê todos.</p></section>
   <section class="card"><div class="tools"><h2 style="margin:0 auto 0 0">Alunos</h2><input id="q" type="search" placeholder="Buscar por nome ou e-mail"><button class="btn ghost" id="csv" type="button">Exportar CSV</button></div><div id="tbl"></div></section>`;
   let t;$("#q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{BUSCA=e.target.value.trim();PAG=1;loadStudents();},300);});
   $("#csv").addEventListener("click",exportCsv);
-  loadStats();loadStudents();
+  loadStats();loadStudents();loadLib();
+}
+const NOMES=["Expectativa vs. realidade","Contexto, RAG e embeddings","Do chatbot ao agente","Production readiness","Defesa inbound","Defesa outbound","Proteção sistêmica","Regra vs. trava","Prompt engineering","Projeto final"];
+async function loadLib(){
+  let d;try{d=await api("/aulas");}catch(x){$("#libs").innerHTML=`<p class="err">${esc(x.message)}</p>`;return;}
+  const on=new Set(d.modulos_liberados||[]);
+  $("#libs").innerHTML=NOMES.map((n,i)=>`<label class="lib"><input type="checkbox" value="${i}" ${on.has(i)?"checked":""}> <b>${String(i).padStart(2,"0")}</b> ${esc(n)}</label>`).join("");
+  $("#libSave").onclick=async()=>{const mods=[...document.querySelectorAll("#libs input:checked")].map(x=>+x.value);
+    try{const r=await api("/admin/liberacao",{method:"POST",body:{modulos:mods}});$("#libMsg").textContent="Salvo. Liberados agora: "+(r.modulos_liberados.join(", ")||"nenhum")+".";}catch(x){$("#libMsg").textContent=x.message;}};
 }
 async function loadStats(){
   let s;try{s=await api("/admin/stats");}catch(x){$("#kpis").innerHTML=`<p class="err">${esc(x.message)}</p>`;return;}
