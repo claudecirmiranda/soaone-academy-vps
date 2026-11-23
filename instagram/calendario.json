@@ -1,0 +1,175 @@
+{
+  "_leia": [
+    "Cada post é publicado na primeira verificação depois de 'quando' (horário de Brasília).",
+    "Com 'modulo', o post só sai se o módulo estiver liberado no admin; senão é adiado 1 semana (adiar_semanas).",
+    "'midias' são arquivos em site/ig (JPEG ou MP4), servidos em MIDIA_URL. Carrossel: 2 a 10 itens, na ordem.",
+    "Tipos: imagem, carrossel, reel (1 vídeo 9:16, 'capa' opcional) e story (1 imagem ou vídeo).",
+    "Exemplo de reel: {\"id\":\"reel-guardrails\",\"tipo\":\"reel\",\"quando\":\"2026-12-03T19:00:00-03:00\",\"midias\":[\"reel_guardrails.mp4\"],\"legenda\":\"...\"}"
+  ],
+  "posts": [
+    {
+      "id": "i0-modulo0",
+      "tipo": "carrossel",
+      "quando": "2026-11-22T11:00:00-03:00",
+      "midias": [
+        "i0_1.jpg",
+        "i0_2.jpg",
+        "i0_3.jpg",
+        "i0_4.jpg",
+        "i0_5.jpg",
+        "i0_6.jpg"
+      ],
+      "legenda_arquivo": "i0.txt",
+      "ativo": false,
+      "nota": "Desligado para não duplicar se você já agendou no Business Suite. Para o script publicar, mude ativo para true."
+    },
+    {
+      "id": "i1-modulo1",
+      "tipo": "carrossel",
+      "quando": "2026-11-23T19:00:00-03:00",
+      "midias": [
+        "i1_1.jpg",
+        "i1_2.jpg",
+        "i1_3.jpg",
+        "i1_4.jpg",
+        "i1_5.jpg",
+        "i1_6.jpg"
+      ],
+      "legenda_arquivo": "i1.txt",
+      "ativo": false,
+      "nota": "Idem: ligue só se não estiver agendado no Business Suite."
+    },
+    {
+      "id": "lancamento",
+      "tipo": "imagem",
+      "quando": "2026-11-24T19:00:00-03:00",
+      "midias": [
+        "lancamento.jpg"
+      ],
+      "legenda_arquivo": "lancamento.txt"
+    },
+    {
+      "id": "i2-modulo2",
+      "tipo": "carrossel",
+      "quando": "2026-12-10T19:00:00-03:00",
+      "modulo": 2,
+      "midias": [
+        "i2_1.jpg",
+        "i2_2.jpg",
+        "i2_3.jpg",
+        "i2_4.jpg",
+        "i2_5.jpg",
+        "i2_6.jpg"
+      ],
+      "legenda_arquivo": "i2.txt"
+    },
+    {
+      "id": "i3-modulo3",
+      "tipo": "carrossel",
+      "quando": "2026-12-17T19:00:00-03:00",
+      "modulo": 3,
+      "midias": [
+        "i3_1.jpg",
+        "i3_2.jpg",
+        "i3_3.jpg",
+        "i3_4.jpg",
+        "i3_5.jpg",
+        "i3_6.jpg"
+      ],
+      "legenda_arquivo": "i3.txt"
+    },
+    {
+      "id": "i4-modulo4",
+      "tipo": "carrossel",
+      "quando": "2026-12-23T19:00:00-03:00",
+      "modulo": 4,
+      "midias": [
+        "i4_1.jpg",
+        "i4_2.jpg",
+        "i4_3.jpg",
+        "i4_4.jpg",
+        "i4_5.jpg",
+        "i4_6.jpg",
+        "i4_7.jpg"
+      ],
+      "legenda_arquivo": "i4.txt"
+    },
+    {
+      "id": "i5-modulo5",
+      "tipo": "carrossel",
+      "quando": "2026-12-30T19:00:00-03:00",
+      "modulo": 5,
+      "midias": [
+        "i5_1.jpg",
+        "i5_2.jpg",
+        "i5_3.jpg",
+        "i5_4.jpg",
+        "i5_5.jpg",
+        "i5_6.jpg",
+        "i5_7.jpg"
+      ],
+      "legenda_arquivo": "i5.txt"
+    },
+    {
+      "id": "i6-modulo6",
+      "tipo": "carrossel",
+      "quando": "2027-01-07T19:00:00-03:00",
+      "modulo": 6,
+      "midias": [
+        "i6_1.jpg",
+        "i6_2.jpg",
+        "i6_3.jpg",
+        "i6_4.jpg",
+        "i6_5.jpg",
+        "i6_6.jpg"
+      ],
+      "legenda_arquivo": "i6.txt"
+    },
+    {
+      "id": "i7-modulo7",
+      "tipo": "carrossel",
+      "quando": "2027-01-14T19:00:00-03:00",
+      "modulo": 7,
+      "midias": [
+        "i7_1.jpg",
+        "i7_2.jpg",
+        "i7_3.jpg",
+        "i7_4.jpg",
+        "i7_5.jpg",
+        "i7_6.jpg"
+      ],
+      "legenda_arquivo": "i7.txt"
+    },
+    {
+      "id": "i8-modulo8",
+      "tipo": "carrossel",
+      "quando": "2027-01-21T19:00:00-03:00",
+      "modulo": 8,
+      "midias": [
+        "i8_1.jpg",
+        "i8_2.jpg",
+        "i8_3.jpg",
+        "i8_4.jpg",
+        "i8_5.jpg",
+        "i8_6.jpg"
+      ],
+      "legenda_arquivo": "i8.txt"
+    },
+    {
+      "id": "i9-modulo9",
+      "tipo": "carrossel",
+      "quando": "2027-01-28T19:00:00-03:00",
+      "modulo": 9,
+      "midias": [
+        "i9_1.jpg",
+        "i9_2.jpg",
+        "i9_3.jpg",
+        "i9_4.jpg",
+        "i9_5.jpg",
+        "i9_6.jpg",
+        "i9_7.jpg"
+      ],
+      "legenda_arquivo": "i9.txt"
+    }
+  ]
+}

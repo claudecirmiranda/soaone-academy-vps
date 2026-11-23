@@ -1,0 +1,13 @@
+Um cliente pede desconto com muita simpatia. O bot concede 90%. Alguém tira print.
+
+A saída do LLM é input não confiável:
+→ Preço confere com a tabela
+→ Moderação na entrada e na saída
+→ Sem fonte, sem resposta
+→ Links só de domínios aprovados
+
+O modelo redige; o sistema garante.
+
+Seu bot já inventou algum preço?
+
+Curso gratuito completo no link da bio. #IAgenerativa #LLM #Chatbot #SegurancaDaInformacao #DevBrasil

@@ -1,0 +1,13 @@
+Seu chatbot passou na demo. Na segunda, quebrou.
+
+Os 4 sintomas que só aparecem com usuários reais:
+1. Esquecimento: o modelo não tem memória
+2. Alucinação: sem fonte, ele completa com o que parece plausível
+3. Obediência cega: instrução e dado são o mesmo texto para ele
+4. Custo sem teto: sem escopo e sem limite, vira IA grátis para qualquer um
+
+Nenhum se resolve com um modelo maior. Todos se resolvem com engenharia ao redor do modelo.
+
+Qual desses você já viu em produção? Conta nos comentários.
+
+Curso gratuito completo no link da bio. #IAgenerativa #LLM #ArquiteturaDeSoftware #DevBrasil #Chatbot #PromptInjection

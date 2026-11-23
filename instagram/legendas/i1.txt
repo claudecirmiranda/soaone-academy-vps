@@ -1,0 +1,12 @@
+Seu bot esquece o seu nome? Não é bug do modelo. É assim que ele funciona.
+
+→ O LLM é stateless: cada chamada começa do zero
+→ Quem guarda o histórico é a sua aplicação, e cada turno reenvia tudo (e cobra por isso)
+→ O RAG busca os trechos certos antes de responder
+→ A permissão vem da sessão e é aplicada antes da busca. Um RAG sem filtro é um vazamento de dados com interface simpática.
+
+O modelo só sabe o que você entrega a ele.
+
+Salve para o seu próximo projeto de RAG.
+
+Curso gratuito completo no link da bio. #IAgenerativa #LLM #RAG #ArquiteturaDeSoftware #DevBrasil #Embeddings

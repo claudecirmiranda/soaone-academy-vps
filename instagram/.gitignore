@@ -1,0 +1,5 @@
+.env
+token.json
+estado.json
+publicar.log
+__pycache__/

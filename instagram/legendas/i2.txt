@@ -1,0 +1,13 @@
+Um chatbot responde. Um agente age, e é aí que mora o risco.
+
+As 4 travas de um agente seguro:
+1. O modelo pede, o código executa
+2. Limite de passos no loop
+3. A identidade do cliente vem da sessão, nunca do modelo
+4. JSON validado do seu lado
+
+O modelo decide o que pedir. O código decide o que é permitido.
+
+Seu agente passa nesses 4 itens?
+
+Curso gratuito completo no link da bio. #IAgenerativa #LLM #AgentesDeIA #ArquiteturaDeSoftware #DevBrasil

@@ -1,0 +1,13 @@
+O ataque nem sempre vem do usuário. Às vezes vem de um PDF.
+
+As barreiras antes de qualquer mensagem chegar ao seu LLM:
+1. Filtro de escopo
+2. Detecção de prompt injection
+3. Máscara de dados pessoais
+4. Conteúdo externo entra como dado, nunca como ordem
+
+Não existe filtro perfeito. Existe arquitetura que aguenta a falha.
+
+Salve antes de colocar seu agente no ar.
+
+Curso gratuito completo no link da bio. #IAgenerativa #LLM #PromptInjection #SegurancaDaInformacao #DevBrasil

@@ -1,0 +1,9 @@
+Antes de colocar um agente de IA em produção, passe por 10 portões. Se um ficar aberto, ainda é demo.
+
+Contexto gerenciado · RAG com permissão · Defesas de entrada · Defesas de saída · Permissões em código · Aprovação humana para o irreversível · Rastreio de cada passo · Fallback e limites · Evals a cada mudança · Raciocínio estruturado antes de executar
+
+Último módulo da soaone Academy, com projeto final e certificado gratuito.
+
+Quantos portões o seu agente fecha?
+
+Curso gratuito completo no link da bio. #IAgenerativa #LLM #ArquiteturaDeSoftware #DevBrasil #IAemProducao

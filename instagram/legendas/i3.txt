@@ -1,0 +1,10 @@
+Funciona na sua máquina? Em produção, a conta da API triplica, o provedor cai e uma mudança no prompt quebra o que funcionava.
+
+→ Prompt caching: fixo no começo, variável no fim
+→ Fallback: um modelo reserva, testado
+→ Evals: todo incidente vira caso de teste
+→ Observabilidade: rastreie cada passo e cada centavo
+
+Qual desses o seu projeto já tem?
+
+Curso gratuito completo no link da bio. #IAgenerativa #LLM #MLOps #ArquiteturaDeSoftware #DevBrasil

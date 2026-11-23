@@ -1,0 +1,12 @@
+Prompt não é mágica. É especificação.
+
+→ Uma conversa nova por tarefa
+→ Delimitadores e exemplos
+→ Mapeia, propõe, executa
+→ Com modelos de raciocínio: o destino e as cercas, não o mapa
+
+E a frase que vai em todo pedido de código: "se não tiver certeza absoluta, pergunte antes de codificar".
+
+Salve e use no próximo pedido ao seu assistente de código.
+
+Curso gratuito completo no link da bio. #IAgenerativa #LLM #PromptEngineering #DevBrasil #Programacao

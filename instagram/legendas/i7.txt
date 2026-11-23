@@ -1,0 +1,11 @@
+"Nunca dê desconto acima de 10%."
+Se essa frase está no prompt, é um pedido. Se está no código, é lei.
+
+No prompt: tom, formato, estilo.
+No código: permissões, dinheiro, dados, ações irreversíveis.
+
+A IA não desobedece por maldade. Ela esquece.
+
+Qual regra do seu agente ainda está só no prompt?
+
+Curso gratuito completo no link da bio. #IAgenerativa #LLM #AgentesDeIA #ArquiteturaDeSoftware #DevBrasil
