@@ -109,10 +109,12 @@ class Token:
 
     def __init__(self):
         self.arq = caminho("TOKEN_ARQUIVO", "token.json")
-        if self.arq.is_file():
-            d = json.loads(self.arq.read_text())
-        else:
-            d = {"access_token": cfg("IG_TOKEN"), "obtido_em": dt.datetime.now(TZ).isoformat(), "expira_em": None}
+        env_tok = os.environ.get("IG_TOKEN", "").strip()
+        d = json.loads(self.arq.read_text()) if self.arq.is_file() else None
+        # token novo colado no .env vale mais que o token.json antigo
+        if d is None or (env_tok and env_tok != d.get("semente")):
+            tok = cfg("IG_TOKEN").strip()
+            d = {"access_token": tok, "semente": tok, "obtido_em": dt.datetime.now(TZ).isoformat(), "expira_em": None}
             self._salvar(d)
         self.d = d
 
@@ -130,17 +132,37 @@ class Token:
     def idade_dias(self) -> float:
         return (dt.datetime.now(TZ) - dt.datetime.fromisoformat(self.d["obtido_em"])).total_seconds() / 86400
 
+    @property
+    def facebook(self) -> bool:
+        """Token EAA… = login do Facebook (graph.facebook.com); IGAA… = login do Instagram (graph.instagram.com)."""
+        return self.valor.startswith("EAA")
+
+    def _trocar_facebook(self) -> dict:
+        app_id, segredo = os.environ.get("FB_APP_ID"), os.environ.get("FB_APP_SECRET")
+        if not (app_id and segredo):
+            raise ErroAPI("token do Facebook sem FB_APP_ID/FB_APP_SECRET no .env: não dá para renovar")
+        return http("GET", "https://graph.facebook.com/oauth/access_token",
+                    {"grant_type": "fb_exchange_token", "client_id": app_id, "client_secret": segredo,
+                     "fb_exchange_token": self.valor})
+
     def renovar(self, forcar: bool = False) -> bool:
         dias = float(os.environ.get("RENOVAR_DIAS", "7"))
+        if self.facebook and not self.d.get("longo") and os.environ.get("FB_APP_ID"):
+            forcar = True  # token do Facebook recém-colado: troca já pelo de 60 dias
         if not forcar and self.idade_dias() < dias:
             return False
-        r = http("GET", "https://graph.instagram.com/refresh_access_token",
-                 {"grant_type": "ig_refresh_token", "access_token": self.valor})
+        if self.facebook:
+            r = self._trocar_facebook()
+        else:
+            r = http("GET", "https://graph.instagram.com/refresh_access_token",
+                     {"grant_type": "ig_refresh_token", "access_token": self.valor})
         agora = dt.datetime.now(TZ)
-        self.d = {"access_token": r["access_token"], "obtido_em": agora.isoformat(),
-                  "expira_em": (agora + dt.timedelta(seconds=int(r.get("expires_in", 5184000)))).isoformat()}
+        exp = r.get("expires_in")
+        self.d = {"access_token": r["access_token"], "semente": self.d.get("semente"), "longo": True,
+                  "obtido_em": agora.isoformat(),
+                  "expira_em": (agora + dt.timedelta(seconds=int(exp))).isoformat() if exp else None}
         self._salvar(self.d)
-        log(f"token renovado; expira em {self.d['expira_em'][:10]}")
+        log(f"token renovado; expira em {(self.d['expira_em'] or 'sem data')[:10]}")
         return True
 
 
@@ -149,13 +171,18 @@ class Instagram:
     def __init__(self, token: Token):
         self.token = token
         versao = os.environ.get("IG_API_VERSAO", "v24.0").strip("/")
-        self.base = "https://graph.instagram.com" + (f"/{versao}" if versao else "")
-        self.user = os.environ.get("IG_USER_ID") or "me"
+        host = "https://graph.facebook.com" if token.facebook else "https://graph.instagram.com"
+        self.base = host + (f"/{versao}" if versao else "")
+        self.user = os.environ.get("IG_USER_ID") or ("" if token.facebook else "me")
+        if not self.user:
+            raise SystemExit("Com token do Facebook (EAA…), IG_USER_ID é obrigatório no .env")
 
     def _p(self, extra: dict) -> dict:
         return {**extra, "access_token": self.token.valor}
 
     def conta(self) -> dict:
+        if self.token.facebook:
+            return http("GET", f"{self.base}/{self.user}", self._p({"fields": "id,username,name,media_count"}))
         return http("GET", f"{self.base}/me", self._p({"fields": "user_id,username,account_type,media_count"}))
 
     def cota(self) -> dict:
@@ -457,7 +484,13 @@ def main(argv=None) -> int:
         rodar(simular=a.simular, so_id=a.id, forcar=a.forcar)
         return 0
     if a.cmd == "conta":
-        ig = Instagram(Token())
+        tok = Token()
+        try:
+            tok.renovar()
+        except ErroAPI as e:
+            print("aviso:", e)
+        ig = Instagram(tok)
+        print(f"API: {ig.base} (token {'do Facebook' if tok.facebook else 'do Instagram'})")
         print(json.dumps(ig.conta(), indent=2, ensure_ascii=False))
         try:
             print(json.dumps(ig.cota(), indent=2))
